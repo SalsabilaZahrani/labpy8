@@ -1,6 +1,6 @@
 # labpy8
 
-Tugas Praktikum
+TUGAS PRAKTIKUM
 
 Buat program sederhana dengan mengaplikasikan penggunaan class. Buatlah
 class untuk menampilkan daftar nilai mahasiswa, dengan ketentuan:
@@ -86,21 +86,23 @@ class untuk menampilkan daftar nilai mahasiswa, dengan ketentuan:
         if __name__ == "__main__":
         main()
 
-INPUT
+Input
 ![Cuplikan layar 2024-12-05 154202](https://github.com/user-attachments/assets/6aa0a771-e68f-40e4-9861-4590d734e647)
 ![Cuplikan layar 2024-12-05 154223](https://github.com/user-attachments/assets/600b9670-b9c0-4ec1-bf7e-8884565397c1)
 ![Cuplikan layar 2024-12-05 154244](https://github.com/user-attachments/assets/fe49ce5d-c4e3-439c-a5d2-132a503655a2)
 
-OUTPUT
+Output
 ![Cuplikan layar 2024-12-05 154740](https://github.com/user-attachments/assets/b505347e-77d6-42c0-a41e-718038a33620)
 ![Cuplikan layar 2024-12-05 154800](https://github.com/user-attachments/assets/9d6410bf-7998-4707-af4c-a65064312a98)
 
-PENJELASAN!
+Penjelasan!
 1. Tambah Data: Menyimpan nama dan nilai mahasiswa ke dalam dictionary.
 2. Tampilkan Data: Menampilkan semua data mahasiswa dalam format daftar.
 3. Hapus Data: Menghapus data mahasiswa berdasarkan nama berdasarkan nama.
 4. Ubah Data: Mengupdate nilai mahasiswa berdasarkan nama.
 Program menyediakan menu interaktif berbasis teks untuk pengguna, berjalan dalam loop hingga memilih opsi Keluar.
 
-FLOWCHART
+Flowchart
 ![flowchart3](https://github.com/user-attachments/assets/35cdaa06-a9b3-4273-b567-9484b9439ccc)
+
+DIAGRAM CLASS
