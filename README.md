@@ -87,11 +87,13 @@ class untuk menampilkan daftar nilai mahasiswa, dengan ketentuan:
         main()
 
 Input
+
 ![Cuplikan layar 2024-12-05 154202](https://github.com/user-attachments/assets/6aa0a771-e68f-40e4-9861-4590d734e647)
 ![Cuplikan layar 2024-12-05 154223](https://github.com/user-attachments/assets/600b9670-b9c0-4ec1-bf7e-8884565397c1)
 ![Cuplikan layar 2024-12-05 154244](https://github.com/user-attachments/assets/fe49ce5d-c4e3-439c-a5d2-132a503655a2)
 
 Output
+
 ![Cuplikan layar 2024-12-05 154740](https://github.com/user-attachments/assets/b505347e-77d6-42c0-a41e-718038a33620)
 ![Cuplikan layar 2024-12-05 154800](https://github.com/user-attachments/assets/9d6410bf-7998-4707-af4c-a65064312a98)
 
@@ -105,4 +107,16 @@ Program menyediakan menu interaktif berbasis teks untuk pengguna, berjalan dalam
 Flowchart
 ![flowchart3](https://github.com/user-attachments/assets/35cdaa06-a9b3-4273-b567-9484b9439ccc)
 
+
 DIAGRAM CLASS
+![diagram class](https://github.com/user-attachments/assets/ebce87f1-f57d-4647-8455-b45b1b07a4ef)
+
+Penjelasan!
+Atribut:
+mahasiswa: Dictionary untuk menyimpan data mahasiswa (nama sebagai key, nilai sebagai value).
+Metode:
+1. _init_(): Menginisialisasi atribut mahasiswa sebagai dictionary kosong.
+2. tambah(nama, nilai): Menambahkan data mahasiswa.
+3. tampilkan(): Menampilkan semua data mahasiswa.
+4. hapus(nama): Menghapus data berdasarkan nama.
+5. ubah(nama, nilai_baru): Memperbarui nilai mahasiswa.
