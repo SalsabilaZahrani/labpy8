@@ -1,116 +1,104 @@
 # labpy8
 
-    import json
+    class Mahasiswa:
+    def __init__(self):
+        self.__data_mahasiswa = []  # Private attribute untuk menyimpan data mahasiswa
 
-    class DaftarNilai:
-    def __init__ (self):
-        self.data = {}
-        self.load_data()
-
-    def load_data(self):
-        try:
-            with open('data_nilai.json', 'r') as file:
-                self.data = json.load(file)
-        except FileNotFoundError:
-            self.data = {}
-        except json.JSONDecodeError:
-            print("File data_nilai.json rusak, memulai dengan data kosong.")
-            self.data = {}
-
-    def save_data(self):
-        with open('data_nilai.json', 'w') as file:
-            json.dump(self.data, file)
-
-    def tambah(self):
-        nama = input("Masukkan nama mahasiswa: ")
-        if nama in self.data:
-            print("Nama mahasiswa sudah ada. Silakan gunakan opsi ubah untuk memperbarui nilai.")
-            return
-        try:
-            nilai = int(input("Masukkan nilai mahasiswa: "))
-            self.data[nama] = nilai
-            self.save_data()
-            print("Data berhasil ditambahkan!")
-        except ValueError:
-            print("Nilai harus berupa angka.")
+    def tambah(self, nama, nim, tugas, uts, uas):
+        """Method untuk menambah data mahasiswa"""
+        nilai_akhir = (tugas * 0.3) + (uts * 0.35) + (uas * 0.35)
+        self.__data_mahasiswa.append({
+            'nama': nama,
+            'nim': nim,
+            'tugas': tugas,
+            'uts': uts,
+            'uas': uas,
+            'akhir': round(nilai_akhir, 2)
+        })
 
     def tampilkan(self):
-        if not self.data:
-            print("Data masih kosong.")
+        """Method untuk menampilkan data mahasiswa"""
+        if not self.__data_mahasiswa:
+            print("\nTidak ada data mahasiswa.")
         else:
-            print("Daftar nilai mahasiswa:")
-            for nama, nilai in sorted(self.data.items()):
-                print(f"{nama}: {nilai}")
+            print("\nDaftar Nilai Mahasiswa:")
+            print("=======================================================")
+            print("| No | NIM    | Nama      | Tugas | UTS | UAS | Akhir |")
+            print("=======================================================")
+            for i, mhs in enumerate(self.__data_mahasiswa, start=1):
+                print(f"| {i:<2} | {mhs['nim']:<6} | {mhs['nama']:<9} | "
+                      f"{mhs['tugas']:<5} | {mhs['uts']:<3} | {mhs['uas']:<3} | {mhs['akhir']:<5} |")
+            print("=======================================================")
 
     def hapus(self, nama):
-        if nama in self.data:
-            del self.data[nama]
-            self.save_data()
-            print("Data berhasil dihapus!")
-        else:
-            print("Nama mahasiswa tidak ditemukan.")
+        """Method untuk menghapus data mahasiswa berdasarkan nama"""
+        for mhs in self.__data_mahasiswa:
+            if mhs['nama'].lower() == nama.lower():
+                self.__data_mahasiswa.remove(mhs)
+                print(f"\nData mahasiswa atas nama {nama} telah dihapus.")
+                return
+        print(f"\nData mahasiswa atas nama {nama} tidak ditemukan.")
 
     def ubah(self, nama):
-        if nama in self.data:
-            try:
-                nilai_baru = int(input("Masukkan nilai baru: "))
-                self.data[nama] = nilai_baru
-                self.save_data()
-                print("Data berhasil diubah!")
-            except ValueError:
-                print("Nilai harus berupa angka.")
-        else:
-            print("Nama mahasiswa tidak ditemukan.")
+        """Method untuk mengubah data mahasiswa berdasarkan nama"""
+        for mhs in self.__data_mahasiswa:
+            if mhs['nama'].lower() == nama.lower():
+                print(f"\nUbah data mahasiswa atas nama {nama}:")
+                mhs['nim'] = input("Masukkan NIM baru: ")
+                mhs['tugas'] = int(input("Masukkan nilai tugas baru: "))
+                mhs['uts'] = int(input("Masukkan nilai UTS baru: "))
+                mhs['uas'] = int(input("Masukkan nilai UAS baru: "))
+                mhs['akhir'] = round((mhs['tugas'] * 0.3) + (mhs['uts'] * 0.35) + (mhs['uas'] * 0.35), 2)
+                print("\nData berhasil diubah.")
+                return
+        print(f"\nData mahasiswa atas nama {nama} tidak ditemukan.")
 
-    def cari(self, nama):
-        if nama in self.data:
-            print(f"{nama}: {self.data[nama]}")
-        else:
-            print("Nama mahasiswa tidak ditemukan.")
 
-    def urutkan(self):
-        if not self.data:
-            print("Data masih kosong.")
-        else:
-            print("Data mahasiswa yang sudah diurutkan:")
-            for nama, nilai in sorted(self.data.items(), key=lambda item: item[1], reverse=True):
-                print(f"{nama}: {nilai}")
+    # Subclass untuk pewarisan
+    class Person(Mahasiswa):
+    def __init__(self):
+        super().__init__()
 
-    def main():
-    daftar_nilai = DaftarNilai()
+    def cetak_data(self):
+        """Method untuk mencetak data mahasiswa (contoh overriding)"""
+        print("\nMemanggil method cetak_data dari class Person.")
+        super().tampilkan()
+
+
+    # Menu program
+    def menu():
+    daftar = Mahasiswa()
 
     while True:
-        print("\nMenu:")
-        print("1. Tambah data")
-        print("2. Tampilkan data")
-        print("3. Hapus data")
-        print("4. Ubah data")
-        print("5. Cari data")
-        print("6. Urutkan data")
-        print("7. Keluar")
-
+        print("\nProgram Input Nilai Mahasiswa")
+        print("1. Tambah Data")
+        print("2. Tampilkan Data")
+        print("3. Hapus Data")
+        print("4. Ubah Data")
+        print("5. Keluar")
         pilihan = input("Pilih menu: ")
 
-        if pilihan == '1':
-            daftar_nilai.tambah()
-        elif pilihan == '2':
-            daftar_nilai.tampilkan()
-        elif pilihan == '3':
-            nama = input("Masukkan nama mahasiswa yang ingin dihapus: ")
-            daftar_nilai.hapus(nama)
-        elif pilihan == '4':
-            nama = input("Masukkan nama mahasiswa yang ingin diubah: ")
-            daftar_nilai.ubah(nama)
-        elif pilihan == '5':
-            nama = input("Masukkan nama mahasiswa yang ingin dicari: ")
-            daftar_nilai.cari(nama)
-        elif pilihan == '6':
-            daftar_nilai.urutkan()
-        elif pilihan == '7':
-            print("Keluar dari program.")
+        if pilihan == "1":
+            nama = input("\nMasukkan Nama: ")
+            nim = input("Masukkan NIM: ")
+            tugas = int(input("Masukkan Nilai Tugas: "))
+            uts = int(input("Masukkan Nilai UTS: "))
+            uas = int(input("Masukkan Nilai UAS: "))
+            daftar.tambah(nama, nim, tugas, uts, uas)
+        elif pilihan == "2":
+            daftar.tampilkan()
+        elif pilihan == "3":
+            nama = input("\nMasukkan Nama Mahasiswa yang Ingin Dihapus: ")
+            daftar.hapus(nama)
+        elif pilihan == "4":
+            nama = input("\nMasukkan Nama Mahasiswa yang Ingin Diubah: ")
+            daftar.ubah(nama)
+        elif pilihan == "5":
+            print("\nTerima kasih telah menggunakan program ini.")
             break
         else:
-            print("Pilihan tidak valid.")
+            print("\nPilihan tidak valid. Coba lagi.")
+
 
     if __name__ == "__main__":
-    main()
+    menu()
